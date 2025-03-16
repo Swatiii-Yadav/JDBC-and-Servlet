@@ -1,2 +1,2 @@
-# JDBC-and-Servlet
+# JDBC
 Hello there!
