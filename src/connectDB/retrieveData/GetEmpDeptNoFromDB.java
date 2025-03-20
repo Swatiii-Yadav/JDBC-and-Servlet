@@ -1,9 +1,9 @@
-package connectDB;
+package connectDB.retrieveData;
 
 import java.sql.*;
 import java.util.Scanner;
 
-public class SearchAllDetailsOfEmpFromDB {
+public class GetEmpDeptNoFromDB {
     public static void main(String[] args) {
 
 
@@ -11,8 +11,8 @@ public class SearchAllDetailsOfEmpFromDB {
         String user = "root";
         String password = "12345678";
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter employee id for more details");
-        int id=sc.nextInt();
+        System.out.println("Enter department number for more details");
+        int  deptNo= sc.nextInt();
         try {
             //load drivers
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -20,15 +20,15 @@ public class SearchAllDetailsOfEmpFromDB {
             Connection con= DriverManager.getConnection(url,user,password);
             System.out.println("Database connected succefully");
             //create statement
-            String query="select * from emp where empId=?";
+            String query="select * from emp where departmentNo=?";
             PreparedStatement statement=con.prepareStatement(query);
-            statement.setInt(1,id);
+
+            statement.setInt(1,deptNo);
             ResultSet rst=statement.executeQuery();
             //process result
             while(rst.next()){
                 System.out.println("User ID: " + rst.getInt("empId") + ", Name: " + rst.getString("empName")+
-                        "  Salary: "+	rst.getDouble("salary")+" department :" + rst.getString("department")+
-                        " departmentNo: " + rst.getInt("departmentNo") +" commission: "+rst.getDouble("commission")+ " hireDate: " +rst.getString("hireDate"));
+                        "  Salary: "+	rst.getInt("departmentNo"));
             }
 
             //close connection
@@ -37,13 +37,13 @@ public class SearchAllDetailsOfEmpFromDB {
             con.close();
 
         }catch (ClassNotFoundException e) {
-            // TODO: handle exception
+
             System.out.println("connection failed");
             e.printStackTrace();
 
         }
         catch (SQLException e) {
-            // TODO: handle exception
+
             System.out.println("connection failed");
             e.printStackTrace();
 

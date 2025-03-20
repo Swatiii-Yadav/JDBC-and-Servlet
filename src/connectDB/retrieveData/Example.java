@@ -1,9 +1,6 @@
-package connectDB;
+package connectDB.retrieveData;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import  java.sql.*;
+import java.sql.*;
 
 public class Example {
     public static void main(String[] args) {

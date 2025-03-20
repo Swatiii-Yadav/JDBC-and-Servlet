@@ -1,49 +1,42 @@
-package connectDB;
+package connectDB.retrieveData;
 
 import java.sql.*;
-import java.util.Scanner;
 
-public class GetEmpDeptNoFromDB {
+public class GetDataFromStudentTable {
     public static void main(String[] args) {
-
+        // TODO Auto-generated method stub
 
         String url = "jdbc:mysql://localhost:3306/student";
         String user = "root";
         String password = "12345678";
-        Scanner sc=new Scanner(System.in);
-        System.out.println("Enter department number for more details");
-        int  deptNo= sc.nextInt();
         try {
             //load drivers
             Class.forName("com.mysql.cj.jdbc.Driver");
             //established connection
-            Connection con= DriverManager.getConnection(url,user,password);
+            Connection con=DriverManager.getConnection(url,user,password);
             System.out.println("Database connected succefully");
             //create statement
-            String query="select * from emp where departmentNo=?";
-            PreparedStatement statement=con.prepareStatement(query);
-
-            statement.setInt(1,deptNo);
-            ResultSet rst=statement.executeQuery();
+            Statement stm=con.createStatement();
+            ResultSet rst=stm.executeQuery("SELECT * FROM emp;");
             //process result
             while(rst.next()){
                 System.out.println("User ID: " + rst.getInt("empId") + ", Name: " + rst.getString("empName")+
-                        "  Salary: "+	rst.getInt("departmentNo"));
+                        "  Salary: "+	rst.getDouble("salary"));
             }
 
             //close connection
             rst.close();
-            statement.close();
+            stm.close();
             con.close();
 
         }catch (ClassNotFoundException e) {
-
+            // TODO: handle exception
             System.out.println("connection failed");
             e.printStackTrace();
 
         }
         catch (SQLException e) {
-
+            // TODO: handle exception
             System.out.println("connection failed");
             e.printStackTrace();
 

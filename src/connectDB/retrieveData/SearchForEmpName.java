@@ -1,4 +1,4 @@
-package connectDB;
+package connectDB.retrieveData;
 
 import java.sql.*;
 import java.util.Scanner;
